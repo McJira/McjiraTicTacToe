@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Definition.cpp" />
+    <ClCompile Include="PlayerDefs.cpp" />
     <ClCompile Include="McjiraTicTacToe.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Declaration.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
