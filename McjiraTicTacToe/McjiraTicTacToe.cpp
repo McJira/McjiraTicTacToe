@@ -4,6 +4,8 @@
 int main()
 {
 
+	InstructPlayer();
+
 	// int for column lookup(j = rows, i = columns
 	int i = 0;
 
@@ -80,9 +82,33 @@ void DrawBoard()
 
 }
 
+void InstructPlayer()
+{
+	cout << "*****Tic Tac Toe *****" << endl;
+	cout << endl;
+	cout << "Directions: Choose which box you want to alter!\n" << endl;
+
+	cout << " 0,0 | 0,1 | 0,2 " << endl;
+	cout << "-----------------" << endl;
+	cout << " 1,0 | 1,1 | 1,2 " << endl;
+	cout << "-----------------" << endl;
+	cout << " 2,0 | 2,1 | 2,2 \n" << endl;
+
+	cout << "Player " << playerturn << ", please choose an option!\n" << endl;
+	cout << "X value : "<< endl;
+	cin >> xvalue;
+	cout << "Y value :" << endl;
+	cin >> yvalue;
+}
+
 void ResetBoard()
 {
 
+
+}
+
+void ScoreBoard()
+{
 
 }
 
