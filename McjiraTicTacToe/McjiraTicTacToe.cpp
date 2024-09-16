@@ -1,24 +1,96 @@
-// McjiraTicTacToe.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-#include <iostream>
+#include "Declaration.h"
+#include <array>
 
 int main()
 {
-    std::cout << "Hello World!\n";
-    //this is Itamar Baharav
-    //this is Chris Shapiro
-    // this is Anthony Gonzalez.
-    // this is Justine Zangara
+
+	// int for column lookup(j = rows, i = columns
+	int i = 0;
+
+
+	//2D array to hold the board positions.
+	//To access location you must choose the x,y positions
+	int board[3][3] = {
+
+		{ -1, -1, -1 },
+		{ -1, -1, -1 },
+		{ -1, -1, -1 }
+
+	};
+
+	Player player_1;
+	Player player_2;
+
+
+
+
+
+	//Bool for alternating turns
+	bool turn = false;
+
+	// for loop to check iterate through the board
+		//use to check where X or O is placed
+	for (int j = 0; j < 3; j++)
+	{
+
+		if (i == 3)
+		{
+			break;
+		}
+
+		else if (j == 2)
+		{
+			i++;
+
+			// -1 due to incrementation after loop end
+			j = -1;
+		}
+
+		std::cout << board[i][j] << std::endl;
+
+
+
+
+
+
+	}
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+void DrawBoard()
+{
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+	/*
+
+	 |-----------------------------------------|
+	 |   __		|	 __				|		   |
+	 |	|  |	|	|  |	  |		|		   |
+	 |	|  |	|	|  |      |		|		   |
+	 |	|__|	|	|__|	  |		|		   |
+	 |			|					|		   |
+	 |__________|___________________|__________|
+	 |			|					|		   |
+	 |			|					|		   |
+	 |			|					|		   |
+	 |			|					|		   |
+	 |			|					|		   |
+	 |_________________________________________|
+
+
+
+
+
+
+	*/
+
+
+
+}
+
+void ResetBoard()
+{
+
+
+}
+
+
+
