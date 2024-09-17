@@ -1,4 +1,4 @@
-#include "Declaration.h"
+#include "Player.h"
 
 
 
@@ -25,6 +25,6 @@ Player::Player()
 }
 Player::~Player()
 {
-	std::cout << "Player object destroyed" << std::endl;
+	std::cout << "\n\nPlayer object destroyed" << std::endl;
 }
 

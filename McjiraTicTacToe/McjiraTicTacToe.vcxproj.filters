@@ -18,12 +18,12 @@
     <ClCompile Include="McjiraTicTacToe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Definition.cpp">
+    <ClCompile Include="PlayerDefs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Declaration.h">
+    <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

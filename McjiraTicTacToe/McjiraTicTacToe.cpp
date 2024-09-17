@@ -1,4 +1,4 @@
-#include "Declaration.h"
+#include "Player.h"
 #include <array>
 #include <iostream>
 using namespace std;
@@ -61,34 +61,10 @@ char InstructPlayer(char board[3][3],bool turn)
 	
 
 
-}
-
-
 int main()
 {
-	
-	char move = 'X';
-	char board[3][3] = {
 
-		{ '-', '-', '-'},
-		{ '-', '-', '-' },
-		{ '-', '-', '-' }
-
-	};
-	//board decleration
-
-
-	displayBoard(board);
-	bool turn = true;
-	cout << endl;
-	char stop='m';
-	while (/*Win() == false)||*/stop != 's'){//make sure to make a function to test the win.
-		cout << "stop?";//this can be removed. it is just to stop the program while i was trouble shooting. 
-		cin >> stop;
-		board,turn=InstructPlayer(board,'X');
-		InstructPlayer(board, turn);
-		
-	}
+	InstructPlayer();
 
 	/*
 	// int for column lookup(j = rows, i = columns
@@ -98,40 +74,101 @@ int main()
 	//2D array to hold the board positions.
 	//To access location you must choose the x,y positions
 
+		{ -1, -1, -1 },
+		{ -1, -1, -1 },
+		{ -1, -1, -1 }
+
+	};
 
 	Player player_1;
 	Player player_2;
 
+
+
+
+
 	//Bool for alternating turns
 	bool turn = false;
+
 	// for loop to check iterate through the board
 		//use to check where X or O is placed
 	for (int j = 0; j < 3; j++)
 	{
 
-		if (i == 3)
-		{
-			break;
-		}
+	//down lines 
+	
+		//Checks for down line from on column 1
 
-		else if (j == 2)
-		{
-			i++;
+	if (array[0][0] == array[1][0] && array[1][0] == array[2][0] && array[2][0] != -1)
+	{
+		std::cout << array[0][0] << " Wins!!! by a vertical line on column 1";
+		return;
+	}
+		//Checks for down line from on column 2
 
-			// -1 due to incrementation after loop end
-			j = -1;
-		}
+	if (array[0][1] == array[1][1] && array[1][1] == array[2][1] && array[2][1] != -1)
+	{
+		std::cout << array[0][1] << " Wins!!! by a vertical line on column 2";
+		return;
+	}
 
-		std::cout << board[i][j] << std::endl;
+		//Checks for down line from on column 3
 
+	if (array[0][2] == array[1][2] && array[1][2] == array[2][2] && array[2][2] != -1)
+	{
+		std::cout << array[0][2] << " Wins!!! by a vertical line on column 3";
+		return;
+	}
 
+	// Checking Diagonals
 
+		//top left to bottom right
+	if (array[0][0] == array[1][1] && array[1][1] == array[2][2] && array[2][2] != -1)
+	{
+		std::cout << array[0][0] << " Wins!!! by a top left to bottom right diagonal creation";
+		return;
+	}
+		//top right to bottom left
 
+	if (array[0][2] == array[1][1] && array[1][1] == array[2][0] && array[2][0] != -1)
+	{
+		std::cout << array[0][2] << " Wins!!! by a top right to bottom left diagonal creation";
+		return;
+	}
 
+	// straight line
+
+		//top line
+	if (array[0][0] == array[0][1] && array[0][1] == array[0][2] && array[0][2] != -1)
+	{
+		std::cout << array[0][0] << " Wins!!! by top line creation";
+		return;
+	}
+
+		//middle line
+	if (array[1][0] == array[1][1] && array[1][1] == array[1][2] && array[1][2] != -1)
+	{
+		std::cout << array[1][0] << " Wins!!! by middle line creation";
+		return;
+	}
+
+		//bottom line
+	if (array[2][0] == array[2][1] && array[2][1] == array[2][2] && array[2][2] != -1)
+	{
+		std::cout << array[2][0] << " Wins!!! by bottom line creation";
+		return;
+	}
+
+	else
+	{ 
+	
+		std::cout << "Next turn";
+		//continue loop for next turn
 
 	}
-	*/
 }
+
+
 
 void DrawBoard()
 {
@@ -157,12 +194,26 @@ void DrawBoard()
 
 }
 
-bool Win() {
-	return false;
+void InstructPlayer()
+{
+	cout << "*****Tic Tac Toe *****" << endl;
+	cout << endl;
+	cout << "Directions: Choose which box you want to alter!\n" << endl;
+
+	cout << " 0,0 | 0,1 | 0,2 " << endl;
+	cout << "-----------------" << endl;
+	cout << " 1,0 | 1,1 | 1,2 " << endl;
+	cout << "-----------------" << endl;
+	cout << " 2,0 | 2,1 | 2,2 \n" << endl;
+
+	cout << "Player " << playerturn << ", please choose an option!\n" << endl;
+	cout << "X value : "<< endl;
+	cin >> xvalue;
+	cout << "Y value :" << endl;
+	cin >> yvalue;
 }
 
-
-
+*/
 
 void ResetBoard()
 {
