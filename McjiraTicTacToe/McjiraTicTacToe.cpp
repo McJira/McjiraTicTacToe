@@ -3,6 +3,122 @@
 #include <iostream>
 using namespace std;
 
+
+
+
+
+
+
+bool CheckBoard(char array[][3])
+{
+	//down lines 
+
+		//Checks for down line from on column 1
+
+	if (array[0][0] == array[1][0] && array[1][0] == array[2][0] && array[2][0] != '-')
+	{
+		cout << array[0][0] << " Wins!!! by a vertical line on column 1";
+		return true;
+	}
+	//Checks for down line from on column 2
+
+	if (array[0][1] == array[1][1] && array[1][1] == array[2][1] && array[2][1] != '-')
+	{
+		cout << array[0][1] << " Wins!!! by a vertical line on column 2";
+		return true;
+	}
+
+	//Checks for down line from on column 3
+
+	if (array[0][2] == array[1][2] && array[1][2] == array[2][2] && array[2][2] != '-')
+	{
+		cout << array[0][2] << " Wins!!! by a vertical line on column 3";
+		return true;
+	}
+
+	// Checking Diagonals
+
+		//top left to bottom right
+	if (array[0][0] == array[1][1] && array[1][1] == array[2][2] && array[2][2] != '-')
+	{
+		cout << array[0][0] << " Wins!!! by a top left to bottom right diagonal creation";
+		return true;
+	}
+	//top right to bottom left
+
+	if (array[0][2] == array[1][1] && array[1][1] == array[2][0] && array[2][0] != '-')
+	{
+		cout << array[0][2] << " Wins!!! by a top right to bottom left diagonal creation";
+		return true;
+	}
+
+	// straight line
+
+		//top line
+	if (array[0][0] == array[0][1] && array[0][1] == array[0][2] && array[0][2] != '-')
+	{
+		cout << array[0][0] << " Wins!!! by top line creation";
+		return true;
+	}
+
+	//middle line
+	if (array[1][0] == array[1][1] && array[1][1] == array[1][2] && array[1][2] != '-')
+	{
+		cout << array[1][0] << " Wins!!! by middle line creation";
+		return true;
+	}
+
+	//bottom line
+	if (array[2][0] == array[2][1] && array[2][1] == array[2][2] && array[2][2] != '-')
+	{
+		cout << array[2][0] << " Wins!!! by bottom line creation";
+		return true;
+	}
+
+	else
+	{
+
+		int j = 0;
+
+		for (int i = 0; i < 3; i++)
+		{
+
+			if (i == 2 && j != 2)
+			{
+
+				i = 0;
+				j++;
+
+			}
+			if (array[j][i] == '-')
+			{
+
+				break;
+
+			}
+			else if (array[j][i] == 'O' || array[j][i] == 'X')
+			{
+				if (j == 2 && i == 2)
+				{
+					cout << "Its a draw" << endl;
+					return true;
+				}
+				else
+				{
+					continue;
+				}
+			}
+
+		}
+
+		return false;
+		cout << "Next turn";
+
+		//continue loop for next turn
+
+	}
+}
+
 void displayBoard(char board[3][3]) {
 	cout << board[0][0]<<"|"<<board[0][1]<<"|"<<board[0][2] << endl;
 	cout << "-----" << endl;
@@ -15,20 +131,20 @@ bool validMove(char board) {
 	//where the valid move should be tested for now it returns true indefinetly
 	return true;
 }
-char InstructPlayer(char board[3][3],bool turn)
+char InstructPlayer(char board[3][3], bool turn)
 {
-	
-	 //true for X. False for O.
+
+	//true for X. False for O.
 	int xvalue;
 	int yvalue;
 	char move;// move X or O depending on player
-	if (turn == true||turn==1) {
+	if (turn == true || turn == 1) {
 		move = 'X';//translates turn to move 
 	}
-	if (turn == false||turn==0) {
+	if (turn == false || turn == 0) {
 		move = 'O'; // translates turn to move
 	}
-	
+
 	cout << "*****Tic Tac Toe *****" << endl;
 	cout << endl;
 	cout << "Directions: Choose which box you want to alter!\n" << endl;
@@ -42,157 +158,96 @@ char InstructPlayer(char board[3][3],bool turn)
 
 	displayBoard(board);//displays board
 
-	cout <<endl<< "Player " << move << ", please choose an option!\n" << endl;
+	cout << endl << "Player " << move << ", please choose an option!\n" << endl;
 	cout << "X value : " << endl;
 	cin >> xvalue;
 	cout << "Y value :" << endl;
 	cin >> yvalue;
 
 	if (/*validMove()*/ true) {//test move validity
-		board[xvalue][yvalue] = move ;
+		board[xvalue][yvalue] = move;
 		turn = !turn;
-		return board[3][3],turn;
-	
+		//added to check for win case or draw
+		return board[3][3], turn;
+
 	}
 	else {
 		cout << "Invalid Move Please Try again";//if the players move is invalid they will redo the move.
-		InstructPlayer(board,turn);
+		InstructPlayer(board, turn);
 	}
-	
+
+}
+
+	int main()
+	{
+
+		bool turn = true;
+		char board[3][3] =
+		{
+			{ '-', '-', '-'},
+			{ '-', '-', '-'},
+			{ '-', '-', '-'}
+		};
+		//InstructPlayer();
 
 
-int main()
-{
 
-	InstructPlayer();
+		//2D array to hold the board positions.
+		//To access location you must choose the x,y positions
+		
 
-	/*
-	// int for column lookup(j = rows, i = columns
-	int i = 0;
+		//InstructPlayer(board, true);
+		while (!CheckBoard(board))
+		{
+			
+			InstructPlayer(board, turn);
+			turn = !turn;
+			
 
-
-	//2D array to hold the board positions.
-	//To access location you must choose the x,y positions
-
-		{ -1, -1, -1 },
-		{ -1, -1, -1 },
-		{ -1, -1, -1 }
+		}
+		
 
 	};
 
-	Player player_1;
-	Player player_2;
+	//Player player_1;
+	//Player player_2;
 
 
 
 
 
 	//Bool for alternating turns
-	bool turn = false;
 
-	// for loop to check iterate through the board
-		//use to check where X or O is placed
-	for (int j = 0; j < 3; j++)
-	{
 
-	//down lines 
-	
-		//Checks for down line from on column 1
 
-	if (array[0][0] == array[1][0] && array[1][0] == array[2][0] && array[2][0] != -1)
-	{
-		std::cout << array[0][0] << " Wins!!! by a vertical line on column 1";
-		return;
-	}
-		//Checks for down line from on column 2
-
-	if (array[0][1] == array[1][1] && array[1][1] == array[2][1] && array[2][1] != -1)
-	{
-		std::cout << array[0][1] << " Wins!!! by a vertical line on column 2";
-		return;
-	}
-
-		//Checks for down line from on column 3
-
-	if (array[0][2] == array[1][2] && array[1][2] == array[2][2] && array[2][2] != -1)
-	{
-		std::cout << array[0][2] << " Wins!!! by a vertical line on column 3";
-		return;
-	}
-
-	// Checking Diagonals
-
-		//top left to bottom right
-	if (array[0][0] == array[1][1] && array[1][1] == array[2][2] && array[2][2] != -1)
-	{
-		std::cout << array[0][0] << " Wins!!! by a top left to bottom right diagonal creation";
-		return;
-	}
-		//top right to bottom left
-
-	if (array[0][2] == array[1][1] && array[1][1] == array[2][0] && array[2][0] != -1)
-	{
-		std::cout << array[0][2] << " Wins!!! by a top right to bottom left diagonal creation";
-		return;
-	}
-
-	// straight line
-
-		//top line
-	if (array[0][0] == array[0][1] && array[0][1] == array[0][2] && array[0][2] != -1)
-	{
-		std::cout << array[0][0] << " Wins!!! by top line creation";
-		return;
-	}
-
-		//middle line
-	if (array[1][0] == array[1][1] && array[1][1] == array[1][2] && array[1][2] != -1)
-	{
-		std::cout << array[1][0] << " Wins!!! by middle line creation";
-		return;
-	}
-
-		//bottom line
-	if (array[2][0] == array[2][1] && array[2][1] == array[2][2] && array[2][2] != -1)
-	{
-		std::cout << array[2][0] << " Wins!!! by bottom line creation";
-		return;
-	}
-
-	else
-	{ 
-	
-		std::cout << "Next turn";
-		//continue loop for next turn
-
-	}
-}
 
 
 
 void DrawBoard()
 {
 
-	/*
+
 	
 	
-	*****Tic Tac Toe*****
+	//*****Tic Tac Toe*****
 
-	Player Turn: // 1 or 2
+	//Player Turn: // 1 or 2
 
-	 - | - | -
-	-----------
-	 - | - | -
-	-----------
-	 - | - | - 
+	// - | - | -
+	//-----------
+	// - | - | -
+	//-----------
+	// - | - | - 
 
-	Score: // 0:1 or whatever it is
+	//Score: // 0:1 or whatever it is
 
-	*/
+	
 
 
 
 }
+
+/*
 
 void InstructPlayer()
 {
@@ -206,14 +261,16 @@ void InstructPlayer()
 	cout << "-----------------" << endl;
 	cout << " 2,0 | 2,1 | 2,2 \n" << endl;
 
-	cout << "Player " << playerturn << ", please choose an option!\n" << endl;
+	//cout << "Player " << playerturn << ", please choose an option!\n" << endl;
 	cout << "X value : "<< endl;
-	cin >> xvalue;
+	//cin >> xvalue;
 	cout << "Y value :" << endl;
-	cin >> yvalue;
+	//cin >> yvalue;
 }
 
 */
+
+
 
 void ResetBoard()
 {
