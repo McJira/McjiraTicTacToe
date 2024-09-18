@@ -185,6 +185,7 @@ char InstructPlayer(char board[3][3], bool turn)
 		cout << "Invalid Move Please Try again";//if the players move is invalid they will redo the move.
 		InstructPlayer(board, turn);
 	}
+	return 0;
 
 }
 
