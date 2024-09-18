@@ -8,7 +8,7 @@ using namespace std;
 
 
 
-//This the Array for our tic tac toe board.
+//This Check Move Function for our tic tac toe board.
 bool CheckBoard(char array[][3])
 {
 	//down lines 
@@ -286,11 +286,6 @@ void InstructPlayer()
 void ResetBoard()
 {
 
-
-}
-
-void ScoreBoard()
-{
 
 }
 
