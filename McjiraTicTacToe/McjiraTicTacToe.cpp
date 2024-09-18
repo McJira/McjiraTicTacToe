@@ -127,9 +127,20 @@ void displayBoard(char board[3][3]) {
 	cout << board[2][0] << "|" << board[2][1] << "|" << board[2][2] << endl;
 }
 
-bool validMove(char board) {
+bool validMove(char board[3][3], int x, int y) {
 	//where the valid move should be tested for now it returns true indefinetly
-	return true;
+	//Checking if the move is within the bounds of the board 
+
+	if (x < 0 || x >= 3 || y < 0 || y >= 3) {
+		return false; 
+		// We want to check and see if the selected cell is not already being occupied when in play.
+	}
+	if (board[x][y] == '-') {
+		return true; 
+	}
+	else {
+		return false; 
+	}
 }
 char InstructPlayer(char board[3][3], bool turn)
 {
@@ -164,11 +175,10 @@ char InstructPlayer(char board[3][3], bool turn)
 	cout << "Y value :" << endl;
 	cin >> yvalue;
 
-	if (/*validMove()*/ true) {//test move validity
+	if (validMove(board, xvalue, yvalue)) {//test move validity
 		board[xvalue][yvalue] = move;
 		turn = !turn;
 		//added to check for win case or draw
-		return board[3][3], turn;
 
 	}
 	else {
