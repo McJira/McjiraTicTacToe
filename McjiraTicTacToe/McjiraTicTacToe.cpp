@@ -281,7 +281,7 @@ void InstructPlayer()
 */
 
 
-
+//Function to reset the board
 void ResetBoard()
 {
 
