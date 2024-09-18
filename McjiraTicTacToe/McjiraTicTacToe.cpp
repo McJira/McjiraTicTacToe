@@ -8,7 +8,7 @@ using namespace std;
 
 
 
-
+//This the Array for our tic tac toe board.
 bool CheckBoard(char array[][3])
 {
 	//down lines 
@@ -185,7 +185,7 @@ char InstructPlayer(char board[3][3], bool turn)
 		cout << "Invalid Move Please Try again";//if the players move is invalid they will redo the move.
 		InstructPlayer(board, turn);
 	}
-
+	return 0;
 }
 
 	int main()
