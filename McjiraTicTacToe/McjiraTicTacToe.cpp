@@ -206,6 +206,8 @@ void ResetBoard(char board[3][3])
 	{
 
 		bool turn = true;
+		bool playing = true;
+		char replay;
 		char board[3][3] =
 		{
 			{ '-', '-', '-'},
@@ -221,16 +223,30 @@ void ResetBoard(char board[3][3])
 		
 
 		//InstructPlayer(board, true);
-		while (!CheckBoard(board))
+		while (playing = true)
 		{
-			
-			InstructPlayer(board, turn);
-			turn = !turn;
-			
+			while (!CheckBoard(board))
+			{
+				InstructPlayer(board, turn);
+				turn = !turn;
+			}
 
+			cout << "Would you like to play again?" << endl;
+			cout << "Enter a 'Y' for yes and a 'N' for no!" << endl;
+			cin >> replay;
+
+			if (replay == 'Y' || replay == 'y')
+			{
+				playing = true;
+				ResetBoard(board);
+			}
+			else
+			{
+				playing = false;
+				break;
+			}
 		}
 		
-		ResetBoard(board);
 	};
 
 	//Player player_1;
