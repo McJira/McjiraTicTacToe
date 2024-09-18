@@ -186,6 +186,7 @@ char InstructPlayer(char board[3][3], bool turn)
 		InstructPlayer(board, turn);
 	}
 	return 0;
+
 }
 
 	int main()
@@ -281,7 +282,7 @@ void InstructPlayer()
 */
 
 
-
+//Function to reset the board
 void ResetBoard()
 {
 
