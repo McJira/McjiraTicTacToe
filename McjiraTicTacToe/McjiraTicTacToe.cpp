@@ -3,6 +3,34 @@
 #include <iostream>
 using namespace std;
 
+// <Lee>
+//    Themes
+//        Comments sparse and largely could be much better ("this check move function for our ...")
+//        Design concept is straightforward, implementation is a bit obscure due to naming, etc.
+//        Variable names are not descriptive
+//        Function names - mostly good, though consider making even clearer - e.g. ValidMove() -> isPlayerMoveValid()
+//        Duplication should be reduced
+//        Review hardcoded values
+//        Remove remnants of unimplemented or refactored code
+//        Implementation has various defects, some user visible, some landmines that may be triggered later (e.g. "while (playing = true)")
+
+/* Sample main block comment to capture design & flow
+ * McJira Tic Tac Toe
+ *     Implements a console (text based) Tic Tac Toe game on a 3x3 board
+ *     User inputs a desired move as a # from 0,0 (top left cell) to 2,2 (bottom right cell)
+ *    A player wins with 3 cells in any direction (row, column or diagnoal)
+ *     A game is considered a tie if no player wins and there are no empty spaces
+ *     Player wins are tracked & can be displayed ...?
+ *
+ * Global data
+ *      None - game board declared in main() and passed into supporting functions
+ * 
+ * Design
+ *      main() - declares board, tracks player turns &
+ *         main loop to display board, get player moves, update board & evaluate if game over
+ *      
+ */
+
 
 
 
@@ -223,6 +251,8 @@ void ResetBoard(char board[3][3])
 		
 
 		//InstructPlayer(board, true);
+
+		// <Lee> this condition actually works - but why?  land mine!
 		while (playing = true)
 		{
 			while (!CheckBoard(board))
