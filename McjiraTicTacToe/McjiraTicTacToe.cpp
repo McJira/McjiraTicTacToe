@@ -50,132 +50,70 @@ using namespace std;
 
 //This Check Move Function for our tic tac toe board.
 // HACK: standard for C++ is lowerCamel Case <Lee>
-bool CheckBoard(char array[][3])
+
+/* 
+ *  Refactoring checkBoard
+ *  returns true if game is over (win or a tie)
+ *     if game is over, will print a message to the console indicating the winner & how they won
+ *       or that the game is tied
+ *  returns false otherwise
+ *  
+ */
+
+bool checkBoard(char array[][3], char playerMarker)
 {
-	//down lines 
+	bool checkWinningVector(char, char, char, char);
 
-		//Checks for down line from on column 1
-	// <Lee>
-	// ToDo: meaning of return values not articulated
-	// ToDo: remove duplication - e.g. "return true"
-	// ToDo: in general - minimize &/or avoid returns inside code blocks
-	// ToDo: a block comment describing approach to validating would be helpful
-	//   for example: check 8 win dimensions (3xRows, 3x Columns, 2x Diagonals by
-	//     checking if same square marker in all 3 squares & that marker is not the empty marker '-'
-	// ToDo: improve variable names - e.g. array -> ticTacToeBoard
-	// Consider: helper functions to minimize duplication
 
-	if (array[0][0] == array[1][0] && array[1][0] == array[2][0] && array[2][0] != '-')
-	{
-		cout << array[0][0] << " Wins!!! by a vertical line on column 1";
-		return true;
-	}
-	//Checks for down line from on column 2
+	// first check columns, then rows, then diagonals & finally,
+	//   walk through table to see if there are empty squares (if none - it's a tie)
 
-	if (array[0][1] == array[1][1] && array[1][1] == array[2][1] && array[2][1] != '-')
-	{
-		cout << array[0][1] << " Wins!!! by a vertical line on column 2";
-		return true;
-	}
+	if (checkWinningVector(playerMarker, array[0][0], array[1][0], array[2][0]))
+		cout << playerMarker << " Wins!!! by a vertical line on column 1" << endl;
+	else if (checkWinningVector(playerMarker, array[0][1], array[1][1], array[2][1]))
+		cout << playerMarker << " Wins!!! by a vertical line on column 2" << endl;
+	else if (checkWinningVector(playerMarker, array[0][2], array[1][2], array[2][2]))
+		cout << playerMarker << " Wins!!! by a vertical line on column 3" << endl;
 
-	//Checks for down line from on column 3
+	// rows
+	else if (checkWinningVector(playerMarker, array[0][0], array[0][1], array[0][2]))
+		cout << playerMarker << " Wins!!! by a horizontal line on row 1" << endl;
+	else if (checkWinningVector(playerMarker, array[1][0], array[1][1], array[1][2]))
+		cout << playerMarker << " Wins!!! by a horizontal line on row 2" << endl;
+	else if (checkWinningVector(playerMarker, array[2][0], array[2][1], array[2][2]))
+		cout << playerMarker << " Wins!!! by a horizontal line on row 3" << endl;
 
-	if (array[0][2] == array[1][2] && array[1][2] == array[2][2] && array[2][2] != '-')
-	{
-		cout << array[0][2] << " Wins!!! by a vertical line on column 3";
-		return true;
-	}
+	// diagonals
+	else if (checkWinningVector(playerMarker, array[0][0], array[1][1], array[2][2]))
+		cout << playerMarker << " Wins!!! by a top left to bottom right diagonal" << endl;
+	else if (checkWinningVector(playerMarker, array[2][0], array[1][1], array[0][2]))
+		cout << playerMarker << " Wins!!! by a top right to bottom left diagonal" << endl;
 
-	// Checking Diagonals
-
-		//top left to bottom right
-	if (array[0][0] == array[1][1] && array[1][1] == array[2][2] && array[2][2] != '-')
-	{
-		cout << array[0][0] << " Wins!!! by a top left to bottom right diagonal creation";
-		return true;
-	}
-	//top right to bottom left
-
-	if (array[0][2] == array[1][1] && array[1][1] == array[2][0] && array[2][0] != '-')
-	{
-		cout << array[0][2] << " Wins!!! by a top right to bottom left diagonal creation";
-		return true;
-	}
-
-	// straight line
-
-		//top line
-	if (array[0][0] == array[0][1] && array[0][1] == array[0][2] && array[0][2] != '-')
-	{
-		cout << array[0][0] << " Wins!!! by top line creation";
-		return true;
-	}
-
-	//middle line
-	if (array[1][0] == array[1][1] && array[1][1] == array[1][2] && array[1][2] != '-')
-	{
-		cout << array[1][0] << " Wins!!! by middle line creation";
-		return true;
-	}
-
-	//bottom line
-	if (array[2][0] == array[2][1] && array[2][1] == array[2][2] && array[2][2] != '-')
-	{
-		cout << array[2][0] << " Wins!!! by bottom line creation";
-		return true;
-	}
-
-	else
-		// <Lee>
-		// Hack: variable names i & j are non-descriptive & usage is counter intuitive (i = column)
-		//   approach is esoteric (e.g. why reset i when column is 2 & row is not two?, why the check for X or O at end?)
-		//   wouldn't a simple doubly nested for loop work here - e.g. for (int row = 0; row < 2; row++) for (int column = 0; column < 2; column++) if array[row][column] = ('-') break; ...
-		// for this design - consider doing evaluation post-loop exit
-		// consider - could just track squares played as you go, rather than scanning entire board each move
-	{
-
-		int j = 0;
-
-		for (int i = 0; i < 3; i++)
-		{
-
-			if (i == 2 && j != 2)
-			{
-
-				i = 0;
-				j++;
-
-			}
-			if (array[j][i] == '-')
-			{
-
-				break;
-
-			}
-			else if (array[j][i] == 'O' || array[j][i] == 'X')
-			{
-				if (j == 2 && i == 2)
-				{
-					cout << "Its a draw" << endl;
-					return true;
-				}
-				else
-				{
-					continue;
+	else { // no winner, check for a tie
+		for (int row = 0; row < 3; row++) {
+			for (int column = 0; column < 3; column++) {
+				if (array[row][column] == '-') {
+					// not a tie
+					return false;
 				}
 			}
-
 		}
+		cout << "Its a draw" << endl;  // if didn't find an empty square, then the game is a tie
+	}  // end checks for game over scenarios - if we got here, then game is over
+	return true;
+}
 
-		// <Lee>
-		//  Comment improval - e.g. what does false return mean?
-		//    note: cout is NEVER executed
-		return false;
-		cout << "Next turn";
-
-		//continue loop for next turn
-
-	}
+/** 
+ * checkWinningVector() - arguments are the player marker (e.g. X or O) which is stored in the board
+ *    and three boxes in the board
+ *    returns true - if all specified boxes contain the player marker
+ *            false - otherwise
+ */
+bool checkWinningVector(char playerMarker, char box1, char box2, char box3) {
+	if ((playerMarker == box1) && (box1 == box2) && (box2 == box3))
+		return true;  // have a winner
+	else
+		return false; // nope
 }
 
 void displayBoard(char board[3][3]) {
@@ -307,7 +245,7 @@ void ResetBoard(char board[3][3])
 		// <Lee> this condition actually works - but why?  land mine!
 		while (playing = true)
 		{
-			while (!CheckBoard(board))
+			while (!checkBoard(board, !turn?'X':'O'))
 			{
 				InstructPlayer(board, turn);
 				// <Lee> consider someone else in the future trying to maintain this code, would they know what this statement is doing?
