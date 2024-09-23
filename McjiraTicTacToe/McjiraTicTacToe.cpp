@@ -28,6 +28,18 @@ using namespace std;
  * Design
  *      main() - declares board, tracks player turns &
  *         main loop to display board, get player moves, update board & evaluate if game over
+ *      CheckBoard(board array) - scans board to see if there is a winner, or tie
+ *         returns - true - winner or tie & prints winning message on console
+ *                   false - game continues
+ *      displayBoard (board array) - displays board on console including showing what cells have been played
+ *         void (no return)
+ *      validMove (board array) - validates player entry is valid (row = 0,1,2 & column = 0,1,2) and square is empty ('-')
+ *         returns - true if move is valid
+ *                   false if move is invalid, or square has already been played
+ *      InstructPlayer (board array, player) - prints game instructions, prompts for & retrieves player move
+ *         return - 0?  (return value not meaningful)
+ *         Note - incorrect moves handled via recursion, only exit criteria is a valid move!
+ *      ResetBoard (board array) - clears board to starting values in each square ('-')
  *      
  */
 
@@ -37,11 +49,21 @@ using namespace std;
 
 
 //This Check Move Function for our tic tac toe board.
+// HACK: standard for C++ is lowerCamel Case <Lee>
 bool CheckBoard(char array[][3])
 {
 	//down lines 
 
 		//Checks for down line from on column 1
+	// <Lee>
+	// ToDo: meaning of return values not articulated
+	// ToDo: remove duplication - e.g. "return true"
+	// ToDo: in general - minimize &/or avoid returns inside code blocks
+	// ToDo: a block comment describing approach to validating would be helpful
+	//   for example: check 8 win dimensions (3xRows, 3x Columns, 2x Diagonals by
+	//     checking if same square marker in all 3 squares & that marker is not the empty marker '-'
+	// ToDo: improve variable names - e.g. array -> ticTacToeBoard
+	// Consider: helper functions to minimize duplication
 
 	if (array[0][0] == array[1][0] && array[1][0] == array[2][0] && array[2][0] != '-')
 	{
@@ -104,6 +126,12 @@ bool CheckBoard(char array[][3])
 	}
 
 	else
+		// <Lee>
+		// Hack: variable names i & j are non-descriptive & usage is counter intuitive (i = column)
+		//   approach is esoteric (e.g. why reset i when column is 2 & row is not two?, why the check for X or O at end?)
+		//   wouldn't a simple doubly nested for loop work here - e.g. for (int row = 0; row < 2; row++) for (int column = 0; column < 2; column++) if array[row][column] = ('-') break; ...
+		// for this design - consider doing evaluation post-loop exit
+		// consider - could just track squares played as you go, rather than scanning entire board each move
 	{
 
 		int j = 0;
@@ -139,6 +167,9 @@ bool CheckBoard(char array[][3])
 
 		}
 
+		// <Lee>
+		//  Comment improval - e.g. what does false return mean?
+		//    note: cout is NEVER executed
 		return false;
 		cout << "Next turn";
 
@@ -251,6 +282,27 @@ void ResetBoard(char board[3][3])
 		
 
 		//InstructPlayer(board, true);
+		// <Lee>
+		//   The main loop is crisp - but non-intuitive, better naming & using helper functions would help a lot
+		//   Consider:
+		//    While (userWantsToPlay)
+		//      While (gameInProgress)
+		//         displayBoard()
+		//         if (isUserMoveValid(getUserMove())
+		//            updateTicTacToeBoard()
+		//            if (GameIsOver() )
+		//               congratulateWinner(); gameInProgress = false
+		//            else
+		//               togglePlayerToMove()
+		//         else printInvalidUserMoveMessage()
+		//      <end current game loop>
+		// 
+		//      if (!userWantsToPlayAgain())
+		//         userWantsToPlay = false
+		//      else
+		//         resetGameBoard()
+		//    <end multiple games loop>
+		//  Note: no recursion, flow and intent becomes clear, functions defined to do ONE thing
 
 		// <Lee> this condition actually works - but why?  land mine!
 		while (playing = true)
@@ -291,7 +343,7 @@ void ResetBoard(char board[3][3])
 
 
 
-
+// ToDo - empty function?
 
 void DrawBoard()
 {
@@ -316,6 +368,8 @@ void DrawBoard()
 
 
 }
+
+// ToDo: DeCommissioned code?
 
 /*
 
