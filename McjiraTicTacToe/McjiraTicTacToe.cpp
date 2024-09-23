@@ -310,6 +310,9 @@ void ResetBoard(char board[3][3])
 			while (!CheckBoard(board))
 			{
 				InstructPlayer(board, turn);
+				// <Lee> consider someone else in the future trying to maintain this code, would they know what this statement is doing?
+				//    no comments here (though there is one above)
+				//    there are much better ways to do this
 				turn = !turn;
 			}
 
